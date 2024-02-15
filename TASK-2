@@ -1,1 +1,70 @@
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+using namespace std;
+namespace fs =filesystem;
 
+void displayMenu() {
+cout<<"1. List files and directories\n";
+cout<<"2. Create directory\n";
+cout<<"3. Copy file\n";
+cout<<"4. Move file\n";
+cout<<"5. Exit\n";
+cout<<"Enter your choice: ";
+}
+void listFilesandDirectories(const string& path) {
+for (const auto& entry : fs::directory_iterator(path)) {
+cout<<entry.path().filename() << '\n';
+}
+}
+void createDirectory(const string& path) {
+string dirName;
+cout << "Enter directory name: ";
+cin >> dirName;
+fs::create_directory(path + "/" + dirName);
+cout << "Directory created successfully.\n";
+}
+void copyFile(const string& sourcePath, const string& destinationPath) {
+    string fileName;
+cout << "Enter file name to copy: ";
+cin>> fileName;
+    fs::copy_file(sourcePath + "/" + fileName, destinationPath + "/" + fileName, fs::copy_options::overwrite_existing);
+cout << "File copied successfully.\n";
+}
+void moveFile(const string& sourcePath, const string& destinationPath) {
+string fileName;
+cout << "Enter file name to move: ";
+cin >> fileName;
+    fs::rename(sourcePath + "/" + fileName, destinationPath + "/" + fileName);
+cout<<"File moved successfully.\n";
+}
+int main() {
+string currentPath = fs::current_path().string();
+int choice;
+
+do {
+displayMenu();
+cin>> choice;
+switch (choice) {
+case 1:
+listFilesandDirectories(currentPath);
+break;
+case 2:
+createDirectory(currentPath);
+break;
+case 3:
+copyFile(currentPath,currentPath);
+break;
+case 4:
+moveFile(currentPath,currentPath);
+break;
+case 5:
+cout << "Exiting the file manager.\n";
+break;
+default:
+cout<< "Invalid choice. Please try again.\n";
+    }
+    }
+while (choice != 5);
+return 0;
+}
