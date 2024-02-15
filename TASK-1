@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int main() {
+int n,guess,chances=0;
+srandom(time(0));
+n=random()% 50+1;
+cout<<"A NUMBER GUESSING GAME";
+cout<<endl;
+do {
+cout<<"Guess Your Number Between 1 And 50-";
+cin>>guess;
+chances++;
+if(guess>n)
+cout<<"Number is too high"<<endl;
+else if(guess<n)
+cout<<"Number is too low"<<endl;
+else
+cout<<"Well Done! You guessed the number in "<<chances<<" chances"<<endl;
+}
+while (guess != n);
+return 0;
+}
