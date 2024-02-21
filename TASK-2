@@ -3,7 +3,6 @@
 #include <filesystem>
 using namespace std;
 namespace fs =filesystem;
-
 void displayMenu() {
 cout<<"1. List files and directories\n";
 cout<<"2. Create directory\n";
@@ -41,7 +40,6 @@ cout<<"File moved successfully.\n";
 int main() {
 string currentPath = fs::current_path().string();
 int choice;
-
 do {
 displayMenu();
 cin>> choice;
